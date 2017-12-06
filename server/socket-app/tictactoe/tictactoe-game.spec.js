@@ -73,7 +73,7 @@ describe('create game command', function() {
 });
 
 
-fdescribe('join game command', function () {
+describe('join game command', function () {
 
 
     let given, when, then;
@@ -93,15 +93,17 @@ fdescribe('join game command', function () {
 
     it('should emit game joined event...', function () {
 
-        given = [{
+        given = [
+            {
             type: "GameCreated",
             user: {
                 userName: "TheGuy"
             },
             name: "TheFirstGame",
             timeStamp: "2014-12-02T11:29:29"
-        }
+            }
         ];
+
         when =
             {
                 type: "JoinGame",
@@ -121,12 +123,53 @@ fdescribe('join game command', function () {
                 timeStamp: "2014-12-02T11:29:29",
                 side:'O'
             }
+
         ];
 
     });
 
     it('should emit FullGameJoinAttempted event when game full..implement this', function () {
-        expect(true).toBe(false);
+        given = [
+            {
+            type: "GameCreated",
+            user: {
+                userName: "TheGuy"
+            },
+            name: "TheFirstGame",
+            timeStamp: "2014-12-02T11:29:29"
+            },
+
+            {
+                type: "GameJoined",
+                user: {
+                    userName: "Gummi"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:29:29",
+                side:'O'
+            }
+        ];
+
+        when =
+            {
+                type: "JoinGame",
+                user: {
+                    userName: "Bensi"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29"
+            };
+
+        then = [
+            {
+                type: "FullGameJoinAttempted",
+                user: {
+                    userName: "Bensi"
+                },
+                name: "TheFirstGame",
+                timeStamp: "2014-12-02T11:30:29"
+            }
+
+        ];
     });
 });
-
