@@ -117,7 +117,7 @@ describe('join game command', function () {
             {
                 type: "GameJoined",
                 user: {
-                    userName: "JONNI"
+                    userName: "Gummi"
                 },
                 name: "TheFirstGame",
                 timeStamp: "2014-12-02T11:29:29",
