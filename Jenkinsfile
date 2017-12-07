@@ -4,11 +4,18 @@ checkout scm
         echo 'Building..'
         sh 'npm install'
         sh 'npm run startpostgres && sleep 10 && npm run migratedb'
-        sh 'npm run citest'
         dir('client') {
             sh 'npm install'
-            sh 'npm citest'
         }
+    }
+
+    stage('Test'){
+        sh 'npm run citest'
+        dir('client') {
+            sh 'npm run citest'
+        }
+        sh 'npm run ciapitest'
+        sh 'npm run ciloadtest'
     }
 
     stage('Deploy') {
