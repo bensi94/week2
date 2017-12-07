@@ -2,10 +2,10 @@ node{
 checkout scm
     stage('Build') {
         echo 'Building..'
-        sh 'npm install'
+        sh 'yarn install'
         sh 'npm run startpostgres && sleep 10 && npm run migratedb'
         sh 'npm run citest'
-        sh 'cd client && npm install'
+        sh 'cd client && yarn install'
         sh 'npm test'
         sh 'cd ..'
     }
