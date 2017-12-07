@@ -7,7 +7,7 @@ checkout scm
         sh 'npm run citest'
         dir('client') {
             sh 'npm install'
-            sh 'npm test'
+            sh 'npm citest'
         }
     }
 
