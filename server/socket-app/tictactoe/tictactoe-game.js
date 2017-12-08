@@ -58,16 +58,27 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-                        applyEvents([{
-                            gameId: cmd.gameId,
-                            type: "MovePlaced",
-                            user: cmd.user,
-                            name: cmd.name,
-                            coordinates: cmd.coordinates,
-                            timeStamp: cmd.timeStamp
-                        }]);
 
-
+                        //Checking if the coordinates already exist
+                        if(gameState.checkCoordinates(cmd.coordinates)){
+                            applyEvents([{
+                                gameId: cmd.gameId,
+                                type: "IllegalMove",
+                                user: cmd.user,
+                                name: cmd.name,
+                                coordinates: cmd.coordinates,
+                                timeStamp: cmd.timeStamp
+                            }]);
+                        } else {
+                            applyEvents([{
+                                gameId: cmd.gameId,
+                                type: "MovePlaced",
+                                user: cmd.user,
+                                name: cmd.name,
+                                coordinates: cmd.coordinates,
+                                timeStamp: cmd.timeStamp
+                            }]);
+                        }
                     },
                     "RequestGameHistory": function(cmd){
                         // Game does not handle this query command, is declared here for making tests more robust.
