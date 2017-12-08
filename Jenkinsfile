@@ -1,7 +1,7 @@
 node{
 checkout scm
-    stage('Build') {
-        echo 'Building..'
+    stage('Instalize') {
+        echo 'Instantizing..'
         sh 'npm install'
         sh 'npm run startpostgres && sleep 10 && npm run migratedb'
         dir('client') {
@@ -17,6 +17,12 @@ checkout scm
         sh 'npm run ciapitest'
         sh 'npm run ciloadtest'
     }
+
+    stage('Build'){
+        sh './dockerbuild.sh'
+    }
+
+    stage
 
     stage('Deploy') {
         echo 'Deploying....'
