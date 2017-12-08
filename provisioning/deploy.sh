@@ -15,4 +15,4 @@ fi
 
 GIT_COMMIT=$(cat ../build/githash.txt)
 
-deploy-on-instance.sh INSTANCE_ID  GIT_COMMIT
+./deploy-on-instance.sh INSTANCE_ID  GIT_COMMIT

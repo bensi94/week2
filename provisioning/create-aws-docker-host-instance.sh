@@ -49,6 +49,6 @@ echo ${INSTANCE_ID} > ./$INSTANCE_ID/instance-id.txt
 test -d ~/runningInstances/ || mkdir -p ~/runningInstances
 cp -R $INSTANCE_ID ~/runningInstances/$INSTANCE_ID
 
-if [ ! -f ~/runningInstances/ ]; then
-    cp delete-aws-docker-host-instance.sh /runningInstances
+if [ ! -f ~/runningInstances/delete-aws-docker-host-instance.sh ]; then
+    cp delete-aws-docker-host-instance.sh ~/runningInstances/
 fi
