@@ -13,6 +13,8 @@ else
     INSTANCE_ID=$(ls -lrt ~/runningInstances | grep  ^d -m 1 | rev | cut -d ' ' -f 1 | rev)
 fi
 
+echo 'Instance ID:' $INSTANCE_ID
+
 GIT_COMMIT=$(cat ../build/githash.txt)
 
-./deploy-on-instance.sh INSTANCE_ID  GIT_COMMIT
+./deploy-on-instance.sh $INSTANCE_ID  $GIT_COMMIT

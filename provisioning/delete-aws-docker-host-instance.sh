@@ -17,5 +17,5 @@ if [ -d "${INSTANCE_DIR}" ]; then
     aws ec2 delete-key-pair --key-name ${KEY_PAIR_NAME}
 
     #Remove the directory from local
-    rm  -rf $INSTANCE_DIR
+    sudo rm  -rf $INSTANCE_DIR
 fi
