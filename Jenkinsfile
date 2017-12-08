@@ -29,4 +29,5 @@ checkout scm
         dir('provisioning') {
             sh 'deyploy.sh'
         }
+    }
 }
