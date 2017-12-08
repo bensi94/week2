@@ -19,12 +19,11 @@ checkout scm
     }
 
     stage('Build'){
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USER')]) {
+            sh 'docker login -u $DOCKER_USER -p $DOCKER_PASSWORD'
             sh './dockerbuild.sh'
         }
     }
-
-    stage
 
     stage('Deploy') {
         echo 'Deploying....'
