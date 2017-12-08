@@ -11,7 +11,7 @@ function serverModule(injected) {
     const Path = require('path');
     const SocketIo = require('socket.io');
     const Postgres = require('./db/postgres');
-    const DbConfig = require('./database.json');
+    let DbConfig =  require('./database_' + (process.env.DB || 'dev') + '.json');
 
     const dbConfig = DbConfig[process.env.DB || 'dev'];
 
