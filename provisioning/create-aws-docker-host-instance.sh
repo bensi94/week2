@@ -27,6 +27,8 @@ if [[ $sgExists == *"InvalidGroup.NotFound"* ]]; then
 
     #Make the protocol acessable from anywhere
     aws ec2 authorize-security-group-ingress --group-name ${SECURITY_GROUP_NAME} --protocol tcp --port 80 --cidr 0.0.0.0/0
+    aws ec2 authorize-security-group-ingress --group-name ${SECURITY_GROUP_NAME} --protocol tcp --port 22 --cidr 0.0.0.0/0
+    aws ec2 authorize-security-group-ingress --group-name ${SECURITY_GROUP_NAME} --protocol tcp --port 8080 --cidr 0.0.0.0/0
 else
     #If the security group alredy exists we just gets its ID
     SECURITY_GROUP_ID=$(aws ec2 describe-security-groups --group-names bensi94-securityGroup --query "SecurityGroups[*].GroupId" --output=text)
