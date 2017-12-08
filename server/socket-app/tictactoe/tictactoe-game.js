@@ -59,9 +59,7 @@ module.exports = function(injected){
                     },
                     "PlaceMove": function(cmd){
 
-
-                        // Check here for conditions which prevent command from altering state
-
+                        applyEvents();
 
 
                     },
@@ -78,4 +76,3 @@ module.exports = function(injected){
         }
     }
 };
-

@@ -3,7 +3,7 @@ checkout scm
     stage('Instalize') {
         echo 'Instantizing..'
         sh 'npm install'
-        sh 'npm run startpostgres && sleep 10 && npm run migratedb'
+        sh 'npm run startpostgres && sleep 10 && npm run migratedb:dev'
         dir('client') {
             sh 'npm install'
         }

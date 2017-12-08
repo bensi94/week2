@@ -173,3 +173,69 @@ describe('join game command', function () {
         ];
     });
 });
+
+ describe('place move command', function () {
+     let given, when, then;
+
+     beforeEach(function () {
+         given = undefined;
+         when = undefined;
+         then = undefined;
+     });
+
+     afterEach(function () {
+         tictactoe(given).executeCommand(when, function (actualEvents) {
+             should(JSON.stringify(actualEvents)).be.exactly(JSON.stringify(then));
+         });
+     });
+
+     it('Should emit MovePlaced on first game move...', function () {
+         given = [
+             {
+             type: "GameCreated",
+             user: {
+                 userName: "TheGuy"
+             },
+             name: "TheFirstGame",
+             timeStamp: "2014-12-02T11:29:29"
+             },
+
+             {
+                 type: "GameJoined",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:29:29",
+                 side:'O'
+             }
+         ];
+
+         when =
+             {
+                 type: "PlaceMove",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: "[0,0]",
+                 timeStamp: "2014-12-02T11:30:29"
+             };
+
+         then = [
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: "[0,0]",
+                 timeStamp: "2014-12-02T11:30:29",
+                 side: 'X'
+             }
+
+         ];
+     });
+
+
+ });
