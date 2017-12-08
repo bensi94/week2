@@ -4,7 +4,6 @@ services:
     environment:
       - 'POSTGRES_HOST=postgres'
       - 'POSTGRES_PORT=5432'
-      - 'NODE_ENV=prod'
       - 'PORT=8080'
       - 'DB=prod'
     image: 'bensi94/tictactoe:${GIT_COMMIT}'
