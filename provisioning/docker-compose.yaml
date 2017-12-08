@@ -8,6 +8,7 @@ services:
     image: 'bensi94/tictactoe:${GIT_COMMIT}'
     ports:
       - '8080:8080'
+      - '5432:5432'
     links:
       - 'postgres'
   postgres:
