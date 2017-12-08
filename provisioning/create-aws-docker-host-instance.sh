@@ -37,7 +37,7 @@ echo ${KEY_PAIR_NAME} > ./ec2_instance/key-pair-name.txt
 echo ${SECURITY_GROUP_ID} > ./ec2_instance/security-group-id.txt
 
 #Here we make the actual instance and run some start up commands on it from ec2-instance-init where docker and more is installed, and we get the instanceID as well
-INSTANCE_ID=$(aws ec2 run-instances --user-data file://ec2-instance-init.sh --image-id ami-e7d6c983 --security-group-ids ${SECURITY_GROUP_ID} --count 1 --instance-type t2.micro --key-name ${KEY_PAIR_NAME} --query 'Instances[0].InstanceId'  --output=text)
+INSTANCE_ID=$(aws ec2 run-instances --user-data file://docker-instance-init.sh --image-id ami-e7d6c983 --security-group-ids ${SECURITY_GROUP_ID} --count 1 --instance-type t2.micro --key-name ${KEY_PAIR_NAME} --query 'Instances[0].InstanceId'  --output=text)
 
 #change the name of the local directory to the INSTANCE_ID so we can keep many instance directories and organize them
 mv ec2_instance $INSTANCE_ID
@@ -46,4 +46,9 @@ mv ec2_instance $INSTANCE_ID
 echo ${INSTANCE_ID} > ./$INSTANCE_ID/instance-id.txt
 
 #copy to keep this between builds
-cp $INSTANCE_ID ~/runningInstances/$INSTANCE_ID
+test -d ~/runningInstances/ || mkdir -p ~/runningInstances
+cp -R $INSTANCE_ID ~/runningInstances/$INSTANCE_ID
+
+if [ ! -f ~/runningInstances/ ]; then
+    cp delete-aws-docker-host-instance.sh /runningInstances
+fi
