@@ -27,7 +27,7 @@ checkout scm
 
     stage('Deploy') {
         dir('provisioning') {
-            sh './deyploy.sh'
+            sh './deploy.sh'
         }
     }
 }
