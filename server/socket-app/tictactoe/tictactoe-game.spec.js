@@ -231,7 +231,6 @@ describe('join game command', function () {
                  name: "TheFirstGame",
                  coordinates: "[0,0]",
                  timeStamp: "2014-12-02T11:30:29",
-                 side: 'X'
              }
 
          ];

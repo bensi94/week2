@@ -58,8 +58,14 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-
-                        applyEvents();
+                        applyEvents([{
+                            gameId: cmd.gameId,
+                            type: "MovePlaced",
+                            user: cmd.user,
+                            name: cmd.name,
+                            coordinates: cmd.coordinates,
+                            timeStamp: cmd.timeStamp
+                        }]);
 
 
                     },
