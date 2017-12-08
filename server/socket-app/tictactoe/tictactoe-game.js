@@ -69,6 +69,15 @@ module.exports = function(injected){
                                 coordinates: cmd.coordinates,
                                 timeStamp: cmd.timeStamp
                             }]);
+                        } else if (gameState.checkPlayerTurn(cmd.user.userName)) {
+                            applyEvents([{
+                                gameId: cmd.gameId,
+                                type: "NotYourMove",
+                                user: cmd.user,
+                                name: cmd.name,
+                                coordinates: cmd.coordinates,
+                                timeStamp: cmd.timeStamp
+                            }]);
                         } else {
                             applyEvents([{
                                 gameId: cmd.gameId,

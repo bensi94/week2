@@ -324,7 +324,7 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 2},
                  timeStamp: "2014-12-02T11:31:29"
              };
 
@@ -335,7 +335,7 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 2},
                  timeStamp: "2014-12-02T11:31:29",
              }
 
