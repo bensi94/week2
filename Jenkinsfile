@@ -19,7 +19,9 @@ checkout scm
     }
 
     stage('Build'){
-        sh './dockerbuild.sh'
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            sh './dockerbuild.sh'
+        }
     }
 
     stage
