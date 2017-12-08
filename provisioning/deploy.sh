@@ -1,6 +1,6 @@
 EXTRA_INSTANCE=$1
-
-if [[ $EXTRA_INSTANCE == '-extra' || $EXTRA_INSTANCE == '-e' || ls -l ~/runningInstances | grep -c ^d == 0 ]]; then
+NUMBER_OF_DIRECTORIES=$(ls -l ~/runningInstances | grep -c ^d)
+if [[ $EXTRA_INSTANCE == '-extra' || $EXTRA_INSTANCE == '-e' || $NUMBER_OF_DIRECTORIES == 0 ]]; then
 
     #Create instance
     ./create-aws-docker-host-instance.sh
