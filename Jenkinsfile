@@ -26,6 +26,11 @@ checkout scm
     }
 
     stage('Deploy') {
-        echo 'Deploying....'
+        withCredentials([string(credentialsId: 'AWS-Access-Key', variable: 'ACCESS-KEY'), string(credentialsId: 'AWS-SecretAccess-Key', variable: 'SECRET-KEY')]) {
+            sh 'aws configure set aws_access_key_id $ACCESS-KEY'
+            sh 'aws configure set aws_secret_access_key $SECRET-KEY'
+            sh 'aws configure set region eu-west-2'
+            sh 'aws ec2 describe-key-pairs --query KeyPairs[*].KeyName --output=text'
+        }
     }
 }
