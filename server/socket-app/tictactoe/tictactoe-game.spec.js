@@ -294,5 +294,52 @@ describe('join game command', function () {
          ];
      });
 
+     it('Should emit NotYourMove whenmit NotYourMove if attempting to make move out of turn...', function () {
+         given = [
+             {
+                 type: "GameCreated",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:29:29"
+             },
+
+             {
+                 type: "GameJoined",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:29:29",
+                 side:'O'
+             }
+
+         ];
+
+         when =
+             {
+                 type: "PlaceMove",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 1},
+                 timeStamp: "2014-12-02T11:31:29"
+             };
+
+         then = [
+             {
+                 type: "NotYourMove",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 1},
+                 timeStamp: "2014-12-02T11:31:29",
+             }
+
+         ];
+     });
 
  });
