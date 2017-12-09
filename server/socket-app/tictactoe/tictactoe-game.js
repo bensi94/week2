@@ -10,9 +10,16 @@ module.exports = function(injected){
             executeCommand: function(cmd, eventHandler){
                 function applyEvents(events, moreEvents){
                     gameState.processEvents(events);
-
+                    
                     // Check here for game state that may result in additional events
-                    eventHandler(events);
+                    if(gameState.checkGameState()){
+                        gameState.processEvents(moreEvents);
+                        moreEvents[0].user.userName = gameState.getWinner();
+                        events.push(moreEvents[0]);
+                        eventHandler(events);
+                    } else {
+                        eventHandler(events);
+                    }
                 }
 
                 let cmdHandlers = {
@@ -58,7 +65,6 @@ module.exports = function(injected){
                         }]);
                     },
                     "PlaceMove": function(cmd){
-
                         //Checking if the coordinates already exist
                         if(gameState.checkCoordinates(cmd.coordinates)){
                             applyEvents([{
@@ -85,6 +91,12 @@ module.exports = function(injected){
                                 user: cmd.user,
                                 name: cmd.name,
                                 coordinates: cmd.coordinates,
+                                timeStamp: cmd.timeStamp
+                            }], [{
+                                gameId: cmd.gameId,
+                                type: "GameWon",
+                                user: cmd.user,
+                                name: cmd.name,
                                 timeStamp: cmd.timeStamp
                             }]);
                         }

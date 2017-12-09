@@ -218,7 +218,7 @@ describe('join game command', function () {
                      userName: "TheGuy"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 1, field: 'X'},
                  timeStamp: "2014-12-02T11:30:29"
              };
 
@@ -229,7 +229,7 @@ describe('join game command', function () {
                      userName: "TheGuy"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 1, field: 'X'},
                  timeStamp: "2014-12-02T11:30:29",
              }
 
@@ -263,7 +263,7 @@ describe('join game command', function () {
                      userName: "TheGuy"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 1, field: 'X'},
                  timeStamp: "2014-12-02T11:30:29",
              }
 
@@ -276,7 +276,7 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 1, field: 'O'},
                  timeStamp: "2014-12-02T11:31:29"
              };
 
@@ -287,7 +287,7 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 1},
+                 coordinates: {x: 0, y: 1, field: 'O'},
                  timeStamp: "2014-12-02T11:31:29",
              }
 
@@ -324,7 +324,7 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 2},
+                 coordinates: {x: 0, y: 2, field: 'O'},
                  timeStamp: "2014-12-02T11:31:29"
              };
 
@@ -335,8 +335,104 @@ describe('join game command', function () {
                      userName: "Gummi"
                  },
                  name: "TheFirstGame",
-                 coordinates: {x: 0, y: 2},
+                 coordinates: {x: 0, y: 2, field: 'O'},
                  timeStamp: "2014-12-02T11:31:29",
+             }
+
+         ];
+     });
+
+     it('Should emit game won on...', function () {
+         given = [
+             {
+                 type: "GameCreated",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:29:29"
+             },
+
+             {
+                 type: "GameJoined",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:30:29",
+                 side:'O'
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:31:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 1, field: 'O'},
+                 timeStamp: "2014-12-02T11:32:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 1, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:33:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 2, field: 'O'},
+                 timeStamp: "2014-12-02T11:34:29",
+             }
+
+         ];
+
+         when =
+             {
+                 type: "PlaceMove",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 2, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:35:29"
+             };
+
+         then = [
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 2, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:35:29",
+             },
+             {
+                 type: "GameWon",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:35:29",
              }
 
          ];
