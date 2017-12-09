@@ -10,11 +10,21 @@ module.exports = function(injected){
             executeCommand: function(cmd, eventHandler){
                 function applyEvents(events, moreEvents){
                     gameState.processEvents(events);
-                    
+
+
                     // Check here for game state that may result in additional events
                     if(gameState.checkGameState()){
                         gameState.processEvents(moreEvents);
-                        moreEvents[0].user.userName = gameState.getWinner();
+                        var winner = gameState.getWinner();
+
+                        var moreEventsCopy = JSON.parse(JSON.stringify(moreEvents[0]))
+                        moreEventsCopy["user"]["userName"] = winner;
+
+                        if(gameState.getWinner()==="draw"){
+                            delete moreEvents[0]["user"];
+                            moreEvents[0].type = "GameDraw";
+                        }
+
                         events.push(moreEvents[0]);
                         eventHandler(events);
                     } else {
