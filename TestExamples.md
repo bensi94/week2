@@ -1,5 +1,9 @@
 # Test examples and scenarios
 
+## INFO
+
+This is a little text about the required tests, they have all been implemented now along with the features they test, on the server side using TDD.
+
 ### 1. Create game command
 
 **Should emit game created event**

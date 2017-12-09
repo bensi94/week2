@@ -15,12 +15,14 @@ module.exports = function (injected) {
         const winningPossibilities = [[{x:0, y:0}, {x:0, y:1}, {x:0, y:2}],[{x:1, y:0}, {x:1, y:1}, {x:1, y:2}], [{x:2, y:0}, {x:2, y:1}, {x:2, y:2}], [{x:0, y:0}, {x:1, y:0}, {x:2, y:0}],[{x:1, y:0}, {x:1, y:1}, {x:2, y:1}], [{x:0, y:2}, {x:1, y:2}, {x:2, y:2}],[{x:0, y:0}, {x:1, y:1}, {x:2, y:2}], [{x:2, y:0}, {x:1, y:1}, {x:0, y:2}]];
 
         function processEvent(event) {
+
+            //We assign player1 to the user that created the game
             if(event.type==="GameCreated" && event.user){
                 player1=event.user.userName;
                 playerInTurn=player1;
             }
 
-            //Once a player Joins the game we make the game full
+            //Once a player Joins the game we make the game full and assing the player to player2
             if(event.type==="GameJoined"){
                 player2=event.user.userName;
                 gameIsFull=true;
@@ -28,6 +30,7 @@ module.exports = function (injected) {
             } else if (event.type==="MovePlaced"){
                 //When a move is placed we store the coordinates of it in object array, unless it's already there
                 if(!checkCoordinates(event.coordinates)){
+                    //We store and change the playerInTurn so we can check if the right player is playing
                     if(!checkPlayerTurn(event.user.userName)){
                         coordinatesArray.push(event.coordinates)
                         if(playerInTurn===player1){
@@ -72,7 +75,7 @@ module.exports = function (injected) {
         }
 
         function checkGameState(){
-            //Check for win
+            //Check for win for both X(player1) and O(player2)
             for (comb in winningPossibilities){
 
                 if(isCoordInArray(winningPossibilities[comb][0], 'X') && isCoordInArray(winningPossibilities[comb][1], 'X') && isCoordInArray(winningPossibilities[comb][2], 'X')){
@@ -84,6 +87,7 @@ module.exports = function (injected) {
                 }
             }
 
+            //If we have a array with 9 coordinates all squres should be full and the game finished
             if (coordinatesArray.length === 9){
                 playerWon = "draw";
                 return true;
@@ -93,6 +97,7 @@ module.exports = function (injected) {
 
         }
 
+        //Use this to check if the coordinates are in already to see if the move is legal
         function isCoordInArray(coordinates, field){
             for (coord in coordinatesArray){
                 if(coordinatesArray[coord].x===coordinates.x && coordinatesArray[coord].y === coordinates.y && coordinatesArray[coord].field === field){

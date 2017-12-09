@@ -12,19 +12,22 @@ module.exports = function(injected){
                     gameState.processEvents(events);
 
 
-                    // Check here for game state that may result in additional events
+                    // This functions checks if the game has been won or finished with a draw
                     if(gameState.checkGameState()){
                         gameState.processEvents(moreEvents);
                         var winner = gameState.getWinner();
 
+                        //This is because of problem with evnets user changeing with moreEvents user
                         var moreEventsCopy = JSON.parse(JSON.stringify(moreEvents[0]))
                         moreEventsCopy["user"]["userName"] = winner;
 
+                        //Checking for draw and takeing the user out if that is
                         if(gameState.getWinner()==="draw"){
                             delete moreEvents[0]["user"];
                             moreEvents[0].type = "GameDraw";
                         }
 
+                        //When final Move is placed we have both MovePlaced and GameWon/GameDraw  so we return them togeather as an object array
                         events.push(moreEvents[0]);
                         eventHandler(events);
                     } else {
@@ -103,6 +106,8 @@ module.exports = function(injected){
                                 coordinates: cmd.coordinates,
                                 timeStamp: cmd.timeStamp
                             }], [{
+                                //This is a little bit wrong information at this point beacuse we need the the first event to happened first
+                                //But then this is fixed when game is won/draw
                                 gameId: cmd.gameId,
                                 type: "GameWon",
                                 user: cmd.user,

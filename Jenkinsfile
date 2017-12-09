@@ -14,8 +14,6 @@ checkout scm
         dir('client') {
             sh 'npm run citest'
         }
-        sh 'npm run ciapitest'
-        sh 'npm run ciloadtest'
     }
 
     stage('Build'){
