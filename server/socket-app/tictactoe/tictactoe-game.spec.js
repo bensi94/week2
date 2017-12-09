@@ -438,4 +438,137 @@ describe('join game command', function () {
          ];
      });
 
+     it('Should not emit game draw if won on last move', function () {
+         given = [
+             {
+                 type: "GameCreated",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:29:29"
+             },
+
+             {
+                 type: "GameJoined",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:30:29",
+                 side:'O'
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:31:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 1, field: 'O'},
+                 timeStamp: "2014-12-02T11:32:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 1, y: 0, field: 'X'},
+                 timeStamp: "2014-12-02T11:33:29",
+             },
+
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 0, y: 2, field: 'O'},
+                 timeStamp: "2014-12-02T11:34:29",
+             },
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 2, y: 2, field: 'X'},
+                 timeStamp: "2014-12-02T11:35:29",
+             },
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 2, y: 0, field: 'O'},
+                 timeStamp: "2014-12-02T11:36:29",
+             },
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 2, y: 1, field: 'X'},
+                 timeStamp: "2014-12-02T11:37:29",
+             },
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "Gummi"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 1, y: 2, field: 'O'},
+                 timeStamp: "2014-12-02T11:38:29",
+             },
+
+
+         ];
+
+         when =
+             {
+                 type: "PlaceMove",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 1, y: 1, field: 'X'},
+                 timeStamp: "2014-12-02T11:39:29"
+             };
+
+         then = [
+             {
+                 type: "MovePlaced",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 coordinates: {x: 1, y: 1, field: 'X'},
+                 timeStamp: "2014-12-02T11:39:29",
+             },
+             {
+                 type: "GameWon",
+                 user: {
+                     userName: "TheGuy"
+                 },
+                 name: "TheFirstGame",
+                 timeStamp: "2014-12-02T11:39:29",
+             }
+
+         ];
+     });
+
  });
