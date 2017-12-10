@@ -1,4 +1,4 @@
-# Jenkins
+# Jenkins and deployment
 
 ### Scripts
 
@@ -35,3 +35,9 @@ The biggest difference with my scripts from the given scripts are that they give
 They also always use the same security group if it exists or make it if necessary.
 
 The running instances can be found in jenkins home directory along with my ```delete-aws-docker-host-instance.sh``` so they can be deleted from there.
+
+### Running instance in use with continues deployment
+
+So my jenkins should be doing everything necessary for continues deployment to a aws host.
+
+[This is a link to the running AWS host](http://ec2-35-177-133-99.eu-west-2.compute.amazonaws.com:8080/)
