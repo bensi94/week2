@@ -15,10 +15,11 @@ module.exports = function (injected) {
         const winningPossibilities = [[{x:0, y:0}, {x:0, y:1}, {x:0, y:2}],[{x:1, y:0}, {x:1, y:1}, {x:1, y:2}], [{x:2, y:0}, {x:2, y:1}, {x:2, y:2}], [{x:0, y:0}, {x:1, y:0}, {x:2, y:0}],[{x:1, y:0}, {x:1, y:1}, {x:2, y:1}], [{x:0, y:2}, {x:1, y:2}, {x:2, y:2}],[{x:0, y:0}, {x:1, y:1}, {x:2, y:2}], [{x:2, y:0}, {x:1, y:1}, {x:0, y:2}]];
 
         function processEvent(event) {
-
+            console.log(event);
             //We assign player1 to the user that created the game
-            if(event.type==="GameCreated" && event.user){
+            if(event.type==="GameCreated"){
                 player1=event.user.userName;
+
                 playerInTurn=player1;
             }
 
